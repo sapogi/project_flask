@@ -18,6 +18,15 @@ def get_post(post_id):
         abort(404)
     return post
 
+def get_comments(post_id):
+    conn = get_db_connection()
+    comments = conn.execute('SELECT * FROM comments WHERE post_id = ?', (post_id,)).fetchall()
+    conn.close()
+
+    if comments is None:
+        abort(404)
+    return comments
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your secret key'
@@ -34,7 +43,8 @@ def index():
 @app.route('/<int:post_id>')
 def post(post_id):
     post = get_post(post_id)
-    return render_template('post.html', post=post)
+    comments = get_comments(post_id)
+    return render_template('post.html', post=post, comments=comments)
 
 
 @app.route('/create', methods=('GET', 'POST'))

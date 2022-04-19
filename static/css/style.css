@@ -1,0 +1,11 @@
+h1 {
+    border: 2px #eee solid;
+    color: #004581;
+    text-align: center;
+    padding: 10px;
+}
+div{
+    border-width: 1px;
+    border-color: rgb(0,0,0);
+    border-style: solid;
+}

@@ -1,7 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>{% block title %} {{ post['title'] }} {% endblock %}</h2>
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <h2>{% block title %} {{ post['title'] }} <{{ post['id'] }}>{% endblock %}</h2>
     <span class="badge badge-primary">{{ post['created'] }}</span>
     <p>{{ post['content'] }}</p>
+    {% for comment in comments %}
+        <div>
+            <p style="color: #FF9F00; font-size: 120%"> <{{comment['id']}}> </p>
+            <p> {{ comment['content'] }} </p>
+            <span class="badge badge-primary">{{ comment['created'] }}</span>
+        </div>
+    {% endfor %}
 {% endblock %}
